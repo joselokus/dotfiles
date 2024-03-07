@@ -1,38 +1,34 @@
-# Antonio Sarosi
-# https://youtube.com/c/antoniosarosi
-# https://github.com/antoniosarosi/dotfiles
-
-# Multimonitor support
-
+import subprocess
+import socket
 from libqtile.config import Screen
-from libqtile import bar
+from libqtile import bar, widget
+
 from libqtile.log_utils import logger
-from .widgets import primary_widgets, secondary_widgets
+from .widgets import primary_widgets, secondary_widgets, ternary_widgets, primary_asus_widgets
 import subprocess
 
 
 def status_bar(widgets):
-    return bar.Bar(widgets, 24, opacity=0.92)
+    return bar.Bar(widgets, 24, opacity=0.96)
 
 
-screens = [Screen(top=status_bar(primary_widgets))]
 
-xrandr = "xrandr | grep -w 'connected' | cut -d ' ' -f 2 | wc -l"
+hostname=socket.gethostname()
 
-command = subprocess.run(
-    xrandr,
-    shell=True,
-    stdout=subprocess.PIPE,
-    stderr=subprocess.PIPE,
-)
-
-if command.returncode != 0:
-    error = command.stderr.decode("UTF-8")
-    logger.error(f"Failed counting monitors using {xrandr}:\n{error}")
-    connected_monitors = 1
+if  hostname == 'asus-getlife':
+    additional_widgets = [secondary_widgets, ternary_widgets]
+    connected_monitors = 3
+    screens = [Screen(
+       top=status_bar(primary_asus_widgets)
+    )]
 else:
-    connected_monitors = int(command.stdout.decode("UTF-8"))
+    additional_widgets = [secondary_widgets]
+    connected_monitors = 2
+    screens = [Screen(
+       top=status_bar(primary_widgets)
+    )]
 
-if connected_monitors > 1:
-    for _ in range(1, connected_monitors):
-        screens.append(Screen(top=status_bar(secondary_widgets)))
+for monitorIndex in range(0, connected_monitors - 1):
+    screens.append(Screen(
+        top=status_bar(additional_widgets[monitorIndex]),
+        ))
