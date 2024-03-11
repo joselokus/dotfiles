@@ -8,6 +8,8 @@ udiskie -t &
 nm-applet &
 cbatticon &
 copyq &
+xset s off &
+xset -dpms &
 ##~/.local/share/JetBrains/Toolbox/bin/jetbrains-toolbox --minimize  &
 ## autocutsel -fork &
 ## autocutsel -selection PRIMARY -fork &

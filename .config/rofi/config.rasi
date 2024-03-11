@@ -51,7 +51,6 @@ configuration {
 	window-format: "{w}    {c}   {t}";
 	click-to-exit: true;
 	show-match: true;
-	theme: "onedark";
 	max-history-size: 25;
 	combi-hide-mode-prefix: false;
 	pid: "/run/user/1000/rofi.pid";
@@ -74,13 +73,9 @@ configuration {
 	kb-accept-custom: "Control+Return";
 	kb-accept-alt: "Shift+Return";
 	kb-delete-entry: "Shift+Delete";
-	kb-mode-next: "Shift+Right,Control+Tab";
-	kb-mode-previous: "Shift+Left,Control+ISO_Left_Tab";
 	kb-row-left: "Control+Page_Up";
 	kb-row-right: "Control+Page_Down";
-	kb-row-up: "Up,Control+p,ISO_Left_Tab";
 	kb-row-down: "Down,Control+n";
-	kb-row-tab: "Tab";
 	kb-page-prev: "Page_Up";
 	kb-page-next: "Page_Down";
 	kb-row-first: "Home,KP_Home";
@@ -128,3 +123,5 @@ configuration {
 	me-accept-entry: "MouseDPrimary";
 	me-accept-custom: "Control+MouseDPrimary";
 }
+//@theme "/usr/share/rofi/themes/Monokai.rasi"
+@theme "/usr/share/rofi/themes/lb.rasi"
